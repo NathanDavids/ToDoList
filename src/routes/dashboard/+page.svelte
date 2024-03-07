@@ -1,12 +1,39 @@
+<script>
+    let todoList = ['Do the groceries'];
+    let currentTodo = '';
+    let error = false;
+
+    function addTodo() {
+        error = false;
+        if (!currentTodo){
+            error = True;
+        }
+        todoList = [...todoList, currentTodo]
+        currentTodo = "";
+    }
+</script>
+
 <div class="mainContainer">
     <div class="headerContainer">
         <h1>ToDo List</h1>
         <button><i class="fa-regular fa-floppy-disk"></i>Save</button>
     </div>
+    <main>
+        {#each todoList as todo, index}
+            <div class="todo">
+            <p>
+                {index+1}. {todo}
+            </p>
+            <div class="actions">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <i class="fa-regular fa-trash-can"></i>
+            </div>
+            </div> 
+        {/each}   
     <main/>
-    <div class="enterTodo">
-        <input type="text" placeholder="Enter ToDo">
-        <button>Add</button>
+    <div class={"enterTodo" + (error ? 'errorBorder' : "")}>
+        <input bind:value={currentTodo} type="text" placeholder="Enter ToDo">
+        <button on:click={addTodo}>Add</button>
     </div>
 </div>
 
@@ -56,12 +83,39 @@
         flex: 1;
     }
 
+    .todo{
+        border-left: 3px solid cyan;
+        padding: 8px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .actions{
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 1.3rem;
+    }
+
+    .actions i{
+        cursor: pointer;
+    }
+
+    .actions i:hover{
+        color: coral;
+    }
+
     .enterTodo{
         display: flex;
         align-items: stretch;
         border: 1px solid #0891b2;
         border-radius: 5px;
         overflow: hidden;
+    }
+
+    .errorBorder{
+        border-color: coral !important;
     }
 
     .enterTodo input{
