@@ -2,11 +2,22 @@
     let email = "";
     let password = "";
     let confirmPassword = "";
+    let error = false;
+
+    function handleAuthenticate(){
+        if (!email || !password || (register && !confirmPassword)){
+            error = True
+            return
+        }
+    }
 </script>
 
 <div class="authContainer">
     <form>
         <h1>Login</h1>
+        {#if error}
+            <p class="error"> The information you have entered is not correct.</p>
+        {/if}
         <label>
             <p class={email ? 'above' : 'center'}>Email</p>
             <input bind:value={email} type="email" placeholder="Email" />
@@ -107,6 +118,11 @@
         left: 6px;
         border: 1px solid transparent;
         opacity: 0;
+    }
+
+    .error{
+        color: coral;
+        font-size: 0.9rem;
     }
 
 </style>
