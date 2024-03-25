@@ -37,6 +37,11 @@
         <button><i class="fa-regular fa-floppy-disk"></i>Save</button>
     </div>
     <main>
+        {#if todoList.length === 0}
+        <p>
+            You have nothing to do!
+        </p>
+        {/if}
         {#each todoList as todo, index}
             <div class="todo">
             <p>
