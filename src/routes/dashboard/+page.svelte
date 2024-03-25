@@ -21,6 +21,14 @@
         currentTodo = todoList[index]
         todoList = newTodoList
     }
+
+    function removeTodo(index){
+        let newTodoList = [...todoList].filter((val, i) => {
+            console.log(i, index, i !== index);
+            return i !== index;
+        });
+        todoList = newTodoList
+    }
 </script>
 
 <div class="mainContainer">
@@ -36,7 +44,7 @@
             </p>
             <div class="actions">
                 <i on:click={() => {editTodo(index)}} on:keydown={() => {}} class="fa-solid fa-pen-to-square"/>
-                <i class="fa-regular fa-trash-can"></i>
+                <i on:click={() => {removeTodo(index)}} on:keydown={() => {}} class="fa-regular fa-trash-can"></i>
             </div>
             </div> 
         {/each}   
